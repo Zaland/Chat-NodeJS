@@ -34,7 +34,8 @@
 				<thead>
 					<tr>
 						<th class="col-lg-2 col-md-2 col-sm-2"> Name </th>
-						<th class="col-lg-10 col-md-10 col-sm-10"> Message </th>
+						<th class="col-lg-8 col-md-8 col-sm-8"> Message </th>
+						<th class="col-lg-2 col-md-2 col-sm-2"></th>
 					</tr>
 				</thead>
 				<tbody id="messages"></tbody>
@@ -74,18 +75,38 @@
 
 			// display different colors for each up to 6 users
 			socket.on('chat message', function(data) {
+				// grab the time
+				var time = new Date();
+				var hours = time.getHours();
+				var minutes = time.getMinutes();
+				var time_string = "";
+
+				// convert the 24 hour clock to 12 hour
+				if (hours > 12) {
+					hours -= 12;
+					time_string = hours + ":" + minutes + " pm";
+				}
+				else if(hours == 0)
+				{
+					hours = 12;
+					time_string = hours + ":" + minutes + " am";
+				}
+				else
+					time_string = hours + ":" + minutes + " am";
+
+				// assign different colors to different users
 				if((data.user_id % 6) == 0)
-					$('#messages').append('<tr><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+					$('#messages').append('<tr><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
 				else if((data.user_id % 6) == 1)
-					$('#messages').append('<tr class="active"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+					$('#messages').append('<tr class="active"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
 				else if((data.user_id % 6) == 2)
-					$('#messages').append('<tr class="warning"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+					$('#messages').append('<tr class="warning"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
 				else if((data.user_id % 6) == 3)
-					$('#messages').append('<tr class="info"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+					$('#messages').append('<tr class="info"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
 				else if((data.user_id % 6) == 4)
-					$('#messages').append('<tr class="danger"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+					$('#messages').append('<tr class="danger"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
 				else if((data.user_id % 6) == 5)
-					$('#messages').append('<tr class="success"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+					$('#messages').append('<tr class="success"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
 
 				// scroll to bottom of page
 				$("html, body").animate({ scrollTop: $(document).height() }, "slow");
