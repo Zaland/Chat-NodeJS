@@ -13,7 +13,7 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
-// receives data from client and sends to all other clients
+// receives data from client
 io.on('connection', function(socket) {
 	//add user name to array and user id
 	socket.on('connection name', function(person) {
@@ -24,7 +24,7 @@ io.on('connection', function(socket) {
 
 	// send data to the clients
   	socket.on('chat message', function(data) {
-    	io.emit('chat message', {user_name: data.user_name, user_msg: data.user_msg});
+    	io.emit('chat message', {user_name: data.user_name, user_msg: data.user_msg, user_id: users.indexOf(data.user_name)});
   	});
 
   	// disconnect the user by removing from both arrays

@@ -30,7 +30,7 @@
 				<h3> Users Connected </h3>
 				<div id="users"></div>
 			</div>
-			<table class="table table-striped table-hover">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th class="col-lg-2 col-md-2 col-sm-2"> Name </th>
@@ -64,6 +64,7 @@
 
 			socket.emit('connection name', {user_name: person});
 
+			// send the data to the server to broadcast to everyone
 			$('form').submit(function(e){
 				e.preventDefault();
 				socket.emit('chat message', {user_name: person, user_msg: $('#message_button').val()});
@@ -71,10 +72,23 @@
 				return false;
 			});
 
+			// display different colors for each up to 6 users
 			socket.on('chat message', function(data) {
-				$('#messages').append('<tr><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+				if((data.user_id % 6) == 0)
+					$('#messages').append('<tr><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+				else if((data.user_id % 6) == 1)
+					$('#messages').append('<tr class="active"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+				else if((data.user_id % 6) == 2)
+					$('#messages').append('<tr class="warning"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+				else if((data.user_id % 6) == 3)
+					$('#messages').append('<tr class="info"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+				else if((data.user_id % 6) == 4)
+					$('#messages').append('<tr class="danger"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+				else if((data.user_id % 6) == 5)
+					$('#messages').append('<tr class="success"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
 			});
 
+			// updates the users connected list at the top
 			socket.on('users update', function(users) {
 				var temp = "";
 				for(i = 0; i < users.length; i++)
