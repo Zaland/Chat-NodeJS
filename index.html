@@ -86,6 +86,9 @@
 					$('#messages').append('<tr class="danger"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
 				else if((data.user_id % 6) == 5)
 					$('#messages').append('<tr class="success"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td></tr>');
+
+				// scroll to bottom of page
+				$("html, body").animate({ scrollTop: $(document).height() }, "slow");
 			});
 
 			// updates the users connected list at the top
