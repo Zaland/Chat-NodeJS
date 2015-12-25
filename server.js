@@ -8,6 +8,9 @@ var io = require('socket.io')(http);
 var users = [];
 var users_id = [];
 
+// the port number for the server to listen to
+var port_number = 2500;
+
 // load the index html file
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
@@ -37,6 +40,6 @@ io.on('connection', function(socket) {
 });
 
 // listen to the port 2500
-http.listen(2500, function(){
-	console.log('listening on *:2500');
+http.listen(port_number, function(){
+	console.log('listening on: ' + port_number);
 });
