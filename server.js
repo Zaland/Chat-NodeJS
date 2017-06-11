@@ -16,6 +16,9 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
 });
 
+// set up directory for files
+app.use(express.static('static'));
+
 // receives data from client
 io.on('connection', function(socket) {
 	//add user name to array and user id
