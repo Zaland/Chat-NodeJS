@@ -1,5 +1,5 @@
 # Chat-NodeJS
-This program creates a simple chat program between multiples users. It uses [express](http://expressjs.com/en/index.html) -- `npm install --save express@4.10.2` -- to help initialize the server app and prepare itself. It also uses [socket.io](http://socket.io/) -- `npm install --save socket.io` -- to help establish connections between users and the server. This app uses a custom version of bootstrap theme known as [Sandstone](https://bootswatch.com/sandstone/).
+This program creates a simple chat program between multiples users. You can install all modules easily by typing in `npm install` or install seperate packages using the following commands. It uses [express](http://expressjs.com/en/index.html) -- `npm install --save express@4.10.2` -- to help initialize the server app and prepare itself. It also uses [socket.io](http://socket.io/) -- `npm install --save socket.io` -- to help establish connections between users and the server. This app uses a custom version of bootstrap theme known as [Sandstone](https://bootswatch.com/sandstone/).
 
 ## Server `(server.js)`
 The server runs by executing the command `node server.js`. The server will listen on port 2500, and can be changed to a different port by changing the number 2500 in the `port_number` variable to the desired port number -- `var port_number = 2500`.
