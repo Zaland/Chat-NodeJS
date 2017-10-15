@@ -1,7 +1,7 @@
 // ask for user's name on the first try
 // if user enters nothing, then ask for name until they enter something
-var person = prompt("Please enter your name.");		
-while(person === "")
+var person = prompt("Please enter your name.");	
+while(person === '' || $.trim(person) === '')
     person = prompt("No name entered. Please enter your name.");
 
 var socket = io();
