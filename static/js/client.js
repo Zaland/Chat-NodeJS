@@ -10,10 +10,11 @@ socket.emit('connection name', {user_name: person});
 // send the data to the server to broadcast to everyone
 $('form').submit(function(e){
 	e.preventDefault();
+    var message = $('#message_button').val();
     
-    // make sure there is value in the input before sending it off
-    if($('#message_button').val() != '') {
-        socket.emit('chat message', {user_name: person, user_msg: $('#message_button').val()});
+    // make sure there is value in the input before sending it off to the server
+    if(message != '' && $.trim(message) != '') {
+        socket.emit('chat message', {user_name: person, user_msg: message});
         $('#message_button').val('');
         return false;
     }
