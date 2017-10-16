@@ -10,6 +10,7 @@ var users_id = [];
 
 // the port number for the server to listen to
 var port_number = 2500;
+var current_user = 1000;
 
 // load the index html file
 app.get('/', function(req, res) {
@@ -30,7 +31,12 @@ io.on('connection', function(socket) {
 
 	// send data to the clients
   	socket.on('chat message', function(data) {
-    	io.emit('chat message', {user_name: data.user_name, user_msg: data.user_msg, user_id: users.indexOf(data.user_name)});
+        if(current_user == users.indexOf(data.user_name))
+            io.emit('chat message', {user_name: data.user_name, user_msg: data.user_msg, user_match: '0'});
+        else {
+            io.emit('chat message', {user_name: data.user_name, user_msg: data.user_msg, user_match: '1'});
+            current_user = users.indexOf(data.user_name);
+        }
   	});
 
   	// disconnect the user by removing from both arrays
@@ -38,6 +44,7 @@ io.on('connection', function(socket) {
 	    var id = users_id.indexOf(socket.id);
 	    users.splice(id, 1);
 	    users_id.splice(id, 1);
+        current_user = 1000;
 	    io.emit('users update', users);
 	});
 });
@@ -46,3 +53,5 @@ io.on('connection', function(socket) {
 http.listen(port_number, function(){
 	console.log('listening on: ' + port_number);
 });
+
+//user_id: users.indexOf(data.user_name)

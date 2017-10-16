@@ -1,8 +1,8 @@
 // ask for user's name on the first try
 // if user enters nothing, then ask for name until they enter something
 var person = prompt("Please enter your name.");	
-while(person === '' || $.trim(person) === '')
-    person = prompt("No name entered. Please enter your name.");
+while(person == '' || $.trim(person) == '' || person.length > 8)
+    person = prompt("No name entered or name exceeds 8 characters. Please enter your name.");
 
 var socket = io();
 socket.emit('connection name', {user_name: person});
@@ -27,33 +27,28 @@ socket.on('chat message', function(data) {
 	var hours = time.getHours();
 	var minutes = time.getMinutes();
 	var time_string = "";
+    
+    // if minutes is less than 10, add an extra 0 in front of the number
+    if(minutes < 10)
+        minutes = '0' + minutes;
 
 	// convert the 24 hour clock to 12 hour
 	if (hours > 12) {
 		hours -= 12;
 		time_string = hours + ":" + minutes + " pm";
 	}
-	else if(hours == 0)
-	{
+	else if(hours == 0) {
 		hours = 12;
 		time_string = hours + ":" + minutes + " am";
 	}
 	else
 		time_string = hours + ":" + minutes + " am";
 
-	// assign different colors to different users
-	if((data.user_id % 6) == 0)
-		$('#messages').append('<tr><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
-	else if((data.user_id % 6) == 1)
-		$('#messages').append('<tr class="active"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
-	else if((data.user_id % 6) == 2)
-		$('#messages').append('<tr class="warning"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
-	else if((data.user_id % 6) == 3)
-		$('#messages').append('<tr class="info"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
-	else if((data.user_id % 6) == 4)
-		$('#messages').append('<tr class="danger"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
-	else if((data.user_id % 6) == 5)
-		$('#messages').append('<tr class="success"><td> ' + data.user_name + ' </td><td>' + data.user_msg + '</td><td> ' + time_string + ' </td></tr>');
+	// forward the message by appending to the table
+    if(data.user_match == 1)
+        $('#messages').append('<tr><td><img class="img-cirlce img-profile" src="img/profile/user.png">' + data.user_name + '</td><td class="user-message">' + data.user_msg + '</td><td class="user-message">' + time_string + '</td></tr>');
+    else
+        $('#messages').append('<tr><td></td><td class="user-message">' + data.user_msg + '</td><td class="user-message">' + time_string + '</td></tr>');
 	
 	// scroll to bottom of page
 	$("html, body").animate({ scrollTop: $(document).height() }, "slow");
