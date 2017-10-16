@@ -32,9 +32,9 @@ io.on('connection', function(socket) {
 	// send data to the clients
   	socket.on('chat message', function(data) {
         if(current_user == users.indexOf(data.user_name))
-            io.emit('chat message', {user_name: data.user_name, user_msg: data.user_msg, user_match: '0'});
+            io.emit('chat message', {user_name: data.user_name, user_msg: data.user_msg, user_profile: data.user_profile, user_match: '0'});
         else {
-            io.emit('chat message', {user_name: data.user_name, user_msg: data.user_msg, user_match: '1'});
+            io.emit('chat message', {user_name: data.user_name, user_msg: data.user_msg, user_profile: data.user_profile, user_match: '1'});
             current_user = users.indexOf(data.user_name);
         }
   	});
@@ -49,9 +49,7 @@ io.on('connection', function(socket) {
 	});
 });
 
-// listen to the port 2500
+// listen to the port 8000
 http.listen(port_number, function(){
 	console.log('listening on: ' + port_number);
 });
-
-//user_id: users.indexOf(data.user_name)

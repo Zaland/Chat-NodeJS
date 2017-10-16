@@ -22,28 +22,95 @@
 
 	<body>
 		<div class="container">
-			<div class="well">
-				<h3> Users Connected </h3>
-				<div id="users"></div>
-			</div>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> Name </th>
-						<th class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> Message </th>
-						<th class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
-					</tr>
-				</thead>
-				<tbody id="messages"></tbody>
-			</table>
-            <form id="message_form">
-                <div class="input-group">
-                    <input type="text" class="form-control" id="message_button" autocomplete="off"/>
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn btn-primary"> Send </button>
-                    </span>
+            <div class="jumbotron content1">
+                <form class="user-info">
+                    <div class="error-name"></div>
+                    <div class="form-group">
+                        <h3 class="name-title"> Choose a name </h3>
+                        <input type="text" class="form-control username-input" placeholder="Enter name" required/>
+                    </div>
+
+                    <h3 class="avatar-title"> Choose an avatar </h3>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <label>
+                                <input type="radio" name="img" id="img1" value="1" checked/>
+                                <img class="img-responsive" src="img/profile/1L.png">
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <label>
+                                <input type="radio" name="img" id="img2" value="2"/>
+                                <img class="img-responsive" src="img/profile/2L.png">
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <label>
+                                <input type="radio" name="img" id="img3" value="3"/>
+                                <img class="img-responsive" src="img/profile/3L.png">
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <label>
+                                <input type="radio" name="img" id="img4" value="4"/>
+                                <img class="img-responsive" src="img/profile/4L.png">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <label>
+                                <input type="radio" name="img" id="img5" value="5"/>
+                                <img class="img-responsive" src="img/profile/5L.png">
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <label>
+                                <input type="radio" name="img" id="img6" value="6"/>
+                                <img class="img-responsive" src="img/profile/6L.png">
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <label>
+                                <input type="radio" name="img" id="img7" value="7"/>
+                                <img class="img-responsive" src="img/profile/7L.png">
+                            </label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <label>
+                                <input type="radio" name="img" id="img8" value="8"/>
+                                <img class="img-responsive" src="img/profile/8L.png">
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-block"> Finish Profile </button>
+                </form>
+            </div>
+            
+            <div class="content2">
+                <div class="well">
+                    <h3> Users Connected </h3>
+                    <div id="users"></div>
                 </div>
-            </form>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2"> Name </th>
+                            <th class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> Message </th>
+                            <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="messages"></tbody>
+                </table>
+                <form id="message-form">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="message_button" autocomplete="off"/>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary"> Send </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
 		</div>
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
