@@ -9,7 +9,7 @@ var users = [];
 var users_id = [];
 
 // the port number for the server to listen to
-var port_number = 2500;
+var port_number = 8000;
 var current_user = 1000;
 
 // load the index html file
